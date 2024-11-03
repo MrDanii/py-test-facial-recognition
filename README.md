@@ -1,3 +1,10 @@
+### Quick Start with Docker
+1. Clone Repository
+2. Create Docker containers:
+```
+docker compose -f docker-compose.yml up --build
+```
+
 ### Development Environment
 
 #### 1. Creating Project
