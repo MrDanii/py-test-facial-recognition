@@ -1,0 +1,28 @@
+services:
+  # Database Container
+  facial-recognition-db:
+    container_name: facial-recognition-db
+    image: postgres:16.2
+    restart: always
+    # this local path is the local volume from the container, for persistent data
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${DATABASE_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DATABASE_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DATABASE_POSTGRES_NAME}
+
+  # Database Container
+  facial-recognition-app:
+    container_name: facial-recognition-app
+    build:
+      context: ./
+      dockerfile: dockerfile
+    depends_on:
+      - facial-recognition-db
+    ports:
+      - 5000:5000
+    command: flask run --host=0.0.0.0 --debug
+
