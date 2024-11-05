@@ -5,15 +5,22 @@ from flask import Flask, jsonify, request
 import face_recognition
 import face_recognition_models
 
+# trying to import this shit but I dont know python
+from databaseconf.connect import connect as testConnect
+from databaseconf.config_db import load_config
+
+# Database services imports
+from databaseconf.services_facial_recognition import insertEmbedding
+
 app = Flask(__name__)
 port = int(os.environ.get('PORT', 5000))
+myDbConfig = load_config()
 
-# * Healtch Check Method
-
-
+# * Healtch Check Method, for API and database
 @app.route('/user/<username>/<int:user_id>', methods=['POST'])
-def show_user_profile(username, user_id):
+def showUserProfile(username, user_id):
     # show the user profile for that user
+    testConnect(myDbConfig)
     return {
         "id": user_id,
         "user": username,
@@ -46,6 +53,9 @@ def generateImageEmbeddings():
     print("Encoding >>>>", imageEncodingsArray.itemsize, file=sys.stderr)
     print("Encoding >>>>", imageEncodingsArray.size, file=sys.stderr)   # 128 array size
     print(imageEncodingsArray, file=sys.stderr)
+    
+    idAddressPersonImage = insertEmbedding([.1, .02, .003, .00004])
+    print(idAddressPersonImage, file=sys.stderr)
 
     # Aquí podrías procesar la imagen, como extraer el embedding, etc.
     # Por ejemplo, vamos a simular un resultado de procesamiento.

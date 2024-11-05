@@ -57,4 +57,4 @@ flask run --host=0.0.0.0 --debug
 #### Notes about Libraries
 https://cmake.org/download/
 not sure why do i need cmake (sad face)
-but it gives error when intalling "face-recognition" python library
+but it gives error when installing "face-recognition" python library

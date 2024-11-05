@@ -5,6 +5,7 @@ FROM python:3.10.3-slim-bullseye
 RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
   build-essential \
+  libpq-dev \
   cmake \
   gfortran \
   git \
@@ -34,6 +35,7 @@ RUN cd ~ && \
   python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
 # Installing project dependencies
+COPY databaseconf/ /root/face_recognition/databaseconf
 COPY venv/ /root/face_recognition
 COPY requirements.txt /root/face_recognition
 RUN cd /root/face_recognition && \
