@@ -35,13 +35,13 @@ RUN cd ~ && \
   python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
 # Installing project dependencies
-COPY databaseconf/ /root/face_recognition/databaseconf
 COPY venv/ /root/face_recognition
 COPY requirements.txt /root/face_recognition
 RUN cd /root/face_recognition && \
-  pip3 install -r requirements.txt
-  # pip3 install --no-cache-dir -r requirements.txt
+pip3 install -r requirements.txt
+# pip3 install --no-cache-dir -r requirements.txt
 
+COPY databaseconf/ /root/face_recognition/databaseconf
 COPY app.py /root/face_recognition
 WORKDIR /root/face_recognition
 
